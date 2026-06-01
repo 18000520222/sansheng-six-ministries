@@ -1,0 +1,23 @@
+{
+  "gateway": {
+    "port": 18789,
+    "bind": "loopback"
+  },
+  "models": [
+    {
+      "provider": "deepseek",
+      "model": "deepseek-chat",
+      "contextWindow": 1048576,
+      "maxTokens": 32768
+    }
+  ],
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "deepseek/deepseek-chat"
+      },
+      "contextWindow": 1048576,
+      "maxTokens": 32768
+    }
+  }
+}

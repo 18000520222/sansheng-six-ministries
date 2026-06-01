@@ -1,0 +1,25 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "srcEntry": "./ets/Application/AbilityStage.ets",
+    "description": "$string:entry_desc",
+    "mainElement": "MainAbility",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "MainAbility",
+        "srcEntry": "./ets/entryability/MainAbility.ts",
+        "launchType": "singleton",
+        "startWithWindow": true,
+        "visible": true
+      }
+    ]
+  }
+}

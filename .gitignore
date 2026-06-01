@@ -1,0 +1,11 @@
+# Credentials - DO NOT COMMIT
+CREDENTIALS.md
+credentials.env
+.env
+
+# Node
+node_modules/
+
+# System
+.DS_Store
+Thumbs.db
