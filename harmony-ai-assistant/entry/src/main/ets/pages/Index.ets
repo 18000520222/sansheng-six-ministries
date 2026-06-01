@@ -1,119 +1,91 @@
-import { THREE_SHENG, SIX_MINISTRIES, Sheng, Ministry } from '../data/DepartmentData';
+import { CEO_PANGU, NINE_DEPARTMENTS, Department } from '../data/DepartmentData';
 import router from '@ohos.router';
 
 @Entry
 @Component
 struct Index {
-  @State activeTab: number = 0; // 0=三省, 1=六部
+  @State activeTab: number = 0; // 0=总经理, 1=九部
 
-  // ========== 三省视图 ==========
+  // ========== 总经理视图 ==========
   @Builder
-  SanShengView() {
+  CEOView() {
     Column() {
-      // 流程提示
       Row() {
-        Text('中书草拟  →  门下审核  →  尚书执行')
-          .fontSize(12)
-          .fontColor('#999')
-          .width('100%')
-          .textAlign(TextAlign.Center)
-          .padding({ top: 12, bottom: 16 })
-      }
+        Text(CEO_PANGU.icon)
+          .fontSize(48)
+          .margin({ right: 16 })
 
-      ForEach(THREE_SHENG, (item: Sheng, index: number) => {
-        Row() {
-          // 序号圆
-          Text(`${index + 1}`)
-            .fontSize(18)
+        Column() {
+          Text(CEO_PANGU.name)
+            .fontSize(22)
             .fontWeight(FontWeight.Bold)
-            .fontColor('#FFFFFF')
-            .width(32)
-            .height(32)
-            .backgroundColor('#1A1A1A')
-            .borderRadius(16)
-            .textAlign(TextAlign.Center)
+          Text(`神将 · ${CEO_PANGU.soulName}`)
+            .fontSize(14)
+            .fontColor('#1677FF')
+            .margin({ top: 4 })
+        }
+        .alignItems(HorizontalAlign.Start)
+      }
+      .width('100%')
+      .padding(20)
+      .backgroundColor('#FFFFFF')
+      .borderRadius(14)
+      .margin({ bottom: 16 })
+
+      Text(CEO_PANGU.description)
+        .fontSize(14)
+        .fontColor('#666')
+        .lineHeight(22)
+        .padding({ left: 4, right: 4 })
+        .margin({ bottom: 16 })
+
+      Text('下辖九部')
+        .fontSize(16)
+        .fontWeight(FontWeight.Bold)
+        .margin({ bottom: 12 })
+        .width('100%')
+
+      ForEach(NINE_DEPARTMENTS, (dept: Department) => {
+        Row() {
+          Text(dept.icon)
+            .fontSize(20)
+            .margin({ right: 10 })
+          Text(`${dept.name} · ${dept.soulName}`)
+            .fontSize(14)
+            .fontColor('#333')
+        }
+        .width('100%')
+        .padding({ top: 8, bottom: 8 })
+      })
+    }
+    .padding({ left: 16, right: 16, top: 8 })
+  }
+
+  // ========== 九部视图 ==========
+  @Builder
+  NineDepartmentsView() {
+    Column() {
+      ForEach(NINE_DEPARTMENTS, (item: Department) => {
+        Row() {
+          // 神将图标
+          Text(item.icon)
+            .fontSize(36)
             .margin({ right: 14 })
 
           Column() {
-            Row() {
-              Text(item.icon)
-                .fontSize(22)
-                .margin({ right: 8 })
-              Text(item.name)
-                .fontSize(18)
-                .fontWeight(FontWeight.Bold)
-              Text(` · ${item.role}`)
-                .fontSize(14)
-                .fontColor('#1677FF')
-            }
-            .margin({ bottom: 6 })
-
-            Text(item.description)
-              .fontSize(13)
-              .fontColor('#666')
-              .lineHeight(20)
-              .margin({ bottom: 10 })
-
-            // 下辖职能标签
-            Row() {
-              ForEach(item.handle, (tag: string) => {
-                Text(tag)
-                  .fontSize(11)
-                  .fontColor('#1677FF')
-                  .backgroundColor('#EEF4FF')
-                  .borderRadius(4)
-                  .padding({ left: 8, right: 8, top: 2, bottom: 2 })
-                  .margin({ right: 6 })
-              })
-            }
-          }
-          .alignItems(HorizontalAlign.Start)
-          .layoutWeight(1)
-        }
-        .width('100%')
-        .padding(16)
-        .backgroundColor('#FFFFFF')
-        .borderRadius(14)
-        .margin({ bottom: 12 })
-        .onClick(() => {
-          router.pushUrl({
-            url: 'pages/ChatPage',
-            params: {
-              departmentId: item.id,
-              departmentName: item.name,
-              prompt: item.prompt
-            }
-          });
-        })
-      })
-    }
-    .padding({ left: 16, right: 16, top: 4 })
-  }
-
-  // ========== 六部视图 ==========
-  @Builder
-  LiuBuView() {
-    Column() {
-      ForEach(SIX_MINISTRIES, (item: Ministry) => {
-        Row() {
-          // 图标
-          Text(item.icon)
-            .fontSize(32)
-            .margin({ right: 12 })
-
-          Column() {
+            // 部门名 + 神将
             Row() {
               Text(item.name)
                 .fontSize(17)
                 .fontWeight(FontWeight.Bold)
               Text(`  ${item.tagline}`)
                 .fontSize(12)
-                .fontColor('#BBB')
+                .fontColor('#CCC')
             }
 
             // 神将名
             Text(item.soulName)
-              .fontSize(20)
+              .fontSize(22)
               .fontWeight(FontWeight.Bold)
               .fontColor('#1677FF')
               .margin({ top: 2 })
@@ -126,7 +98,7 @@ struct Index {
 
             // 业务标签
             Row() {
-              ForEach(item.handles, (tag: string) => {
+              ForEach(item.handles.slice(0, 3), (tag: string) => {
                 Text(tag)
                   .fontSize(10)
                   .fontColor('#888')
@@ -134,6 +106,19 @@ struct Index {
                   .borderRadius(3)
                   .padding({ left: 6, right: 6, top: 1, bottom: 1 })
                   .margin({ right: 4, top: 4 })
+              })
+            }
+
+            // 开源武器标签
+            Row() {
+              ForEach(item.openSourceWeapons.slice(0, 2), (weapon: string) => {
+                Text(`⚔️ ${weapon}`)
+                  .fontSize(9)
+                  .fontColor('#E6A817')
+                  .backgroundColor('#FFF8E1')
+                  .borderRadius(3)
+                  .padding({ left: 5, right: 5, top: 1, bottom: 1 })
+                  .margin({ right: 4, top: 2 })
               })
             }
           }
@@ -145,9 +130,9 @@ struct Index {
             .fontColor('#CCCCCC')
         }
         .width('100%')
-        .padding(14)
+        .padding(16)
         .backgroundColor('#FFFFFF')
-        .borderRadius(12)
+        .borderRadius(14)
         .margin({ bottom: 10 })
         .onClick(() => {
           router.pushUrl({
@@ -155,7 +140,7 @@ struct Index {
             params: {
               departmentId: item.id,
               departmentName: item.name,
-              departmentTag: item.tagline,
+              soulName: item.soulName,
               prompt: item.prompt
             }
           });
@@ -169,13 +154,13 @@ struct Index {
     Column() {
       // ===== 顶栏 =====
       Row() {
-        Text('三省六部')
-          .fontSize(26)
+        Text('总经理 · 盘古')
+          .fontSize(22)
           .fontWeight(FontWeight.Bold)
 
         Blank()
 
-        Text('AI·朝堂')
+        Text('九部制')
           .fontSize(13)
           .fontColor('#AAA')
           .padding({ left: 10, right: 10, top: 4, bottom: 4 })
@@ -187,7 +172,7 @@ struct Index {
 
       // ===== Tab 切换 =====
       Row() {
-        Button('三省 · 决策')
+        Button('🌐 总经理')
           .fontSize(14)
           .fontColor(this.activeTab === 0 ? '#FFF' : '#666')
           .backgroundColor(this.activeTab === 0 ? '#1A1A1A' : '#F5F5F5')
@@ -195,7 +180,7 @@ struct Index {
           .height(36)
           .onClick(() => { this.activeTab = 0 })
 
-        Button('六部 · 执行')
+        Button('📋 九部')
           .fontSize(14)
           .fontColor(this.activeTab === 1 ? '#FFF' : '#666')
           .backgroundColor(this.activeTab === 1 ? '#1A1A1A' : '#F5F5F5')
@@ -211,9 +196,9 @@ struct Index {
       // ===== 内容区 =====
       Scroll() {
         if (this.activeTab === 0) {
-          this.SanShengView()
+          this.CEOView()
         } else {
-          this.LiuBuView()
+          this.NineDepartmentsView()
         }
       }
       .layoutWeight(1)

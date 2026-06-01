@@ -14,21 +14,29 @@ Before doing anything else:
 2. Read `USER.md` — this is who you're helping
 3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
 4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
-5. Read `SANSHENG.md` — 三省六部运行框架
-6. Read `skills/SHANGSHU_PROTOCOL.md` — 尚书省调度协议
-7. Read `skills/MENXIA_FEEDBACK.md` — 门下省质量回路
+5. Read `SANSHENG.md` — 三省六部运行框架 + 武器调度
+6. Read `DEPARTMENT_ARSENAL.md` — 各部开源武器库
+7. Read `skills/SHANGSHU_PROTOCOL.md` — 尚书省调度协议
+8. Read `skills/MENXIA_FEEDBACK.md` — 门下省质量回路
+9. Read `skills/libu/{ribu,hubu,libu,bingbu,xingbu,gongbu}.md` — 六部技能
 
 Don't ask permission. Just do it.
 
 ### 三省六部启动检查
 
 每次启动后，尚书省自动盘点：
-- [ ] 吏部：记忆文件是否完整可读？
-- [ ] 户部：项目结构是否规整？凭证是否有效？
-- [ ] 兵部：HEARTBEAT.md 是否有待办？
-- [ ] 刑部：是否有安全隐患需要关注？
-- [ ] 礼部：回复风格是否与上次一致？
-- [ ] 工部：最近一次工程操作是否成功？
+- [ ] 吏部：Mem0 记忆层是否可用？记忆文件完整否？
+- [ ] 户部：DuckDB 可否查询？项目结构是否规整？
+- [ ] 兵部：Perplexica/Tavily 搜索可用？HEARTBEAT.md 待办？
+- [ ] 刑部：Gitleaks 密钥扫描通过？有没有安全隐患？
+- [ ] 礼部：回复风格是否与上次一致？多平台适配？
+- [ ] 工部：Aider/OpenHands 可用？最近工程操作是否成功？
+
+### 武器库自检
+启动时快速盘点（详见 DEPARTMENT_ARSENAL.md）：
+- [ ] 是否有武器库项目发布了重大更新？
+- [ ] 是否有武器被标记为 deprecated？
+- [ ] 是否有新的顶级项目值得加入武器库？
 
 ## Memory
 
